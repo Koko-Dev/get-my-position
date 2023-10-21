@@ -7,7 +7,7 @@ function getGeolocation() {
 
 export default function App() {
   const [ isLoading, setIsLoading ] = useState( false );
-  const [ countCicks, setCountClicks ] = useState( 0 );
+  const [ countClicks, setCountClicks ] = useState( 0 );
   const [ position, setPosition ] = useState( {} );
   const [ error, setError ] = useState( null );
   
@@ -20,20 +20,18 @@ export default function App() {
     setIsLoading( true );
     
     navigator.geolocation.getCurrentPosition( ( pos ) => {
-      setPosition( {lat: pos.coords.latitude, lng: pos.coords.longitude} );
+      setPosition( { lat: pos.coords.latitude, lng: pos.coords.longitude } );
       setIsLoading( false );
-      },
-                                              ( error ) => {
+    }, ( error ) => {
       setError( error.message );
       setIsLoading( false );
     } );
     
-    /*
-    
-      function success( pos ) {
-         setPosition( { lat: pos.coords.latitude, lng: pos.coords.longitude } );
-         setIsLoading( false );
-       }
+    /*  Note:  By the book
+     function success( pos ) {
+       setPosition( { lat: pos.coords.latitude, lng: pos.coords.longitude } );
+       setIsLoading( false );
+     }
      
      function error( err ) {
        setError( err.message );
@@ -41,7 +39,6 @@ export default function App() {
      }
      
      navigator.geolocation.getCurrentPosition( success, error );
-     
      */
     
   }
@@ -66,6 +63,6 @@ export default function App() {
               </a>
             </p> ) }
         
-        <p>You requested position { countCicks } times</p>
+        <p>You requested position { countClicks } times</p>
       </div> );
 }
