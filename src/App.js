@@ -40,7 +40,6 @@ export default function App() {
      
      navigator.geolocation.getCurrentPosition( success, error );
      */
-    
   }
   
   return (
