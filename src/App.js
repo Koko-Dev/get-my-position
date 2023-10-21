@@ -1,21 +1,17 @@
 import { useState } from 'react';
-
-
-function getGeolocation() {
-  
-}
+import { useGeolocation } from './useGeolocation';
 
 export default function App() {
-  const [ isLoading, setIsLoading ] = useState( false );
+  const {
+    isLoading, position: { lat, lng }, error, getPosition
+  } = useGeolocation();
+  
   const [ countClicks, setCountClicks ] = useState( 0 );
-  const [ position, setPosition ] = useState( {} );
-  const [ error, setError ] = useState( null );
   
-  const { lat, lng } = position;
-  
+  /*
   function getPosition() {
     setCountClicks( ( count ) => count + 1 );
-    if ( !navigator.geolocation ) return setError( 'Your browser dow not support geolocation' );
+    if ( !navigator.geolocation ) return setError( 'Your browser does not support geolocation' );
     
     setIsLoading( true );
     
@@ -27,24 +23,30 @@ export default function App() {
       setIsLoading( false );
     } );
     
-    /*  Note:  By the book
+    /!*  Note:  By the book
      function success( pos ) {
-       setPosition( { lat: pos.coords.latitude, lng: pos.coords.longitude } );
-       setIsLoading( false );
+     setPosition( { lat: pos.coords.latitude, lng: pos.coords.longitude } );
+     setIsLoading( false );
      }
      
      function error( err ) {
-       setError( err.message );
-       setIsLoading( false );
+     setError( err.message );
+     setIsLoading( false );
      }
      
      navigator.geolocation.getCurrentPosition( success, error );
-     */
+     *!/
+  }
+   */
+  
+  function handleClick() {
+    setCountClicks( ( prevState ) => prevState + 1 );
+    getPosition();
   }
   
   return (
       <div>
-        <button onClick={ getPosition } disabled={ isLoading }>
+        <button onClick={ handleClick } disabled={ isLoading }>
           Get my position
         </button>
         
